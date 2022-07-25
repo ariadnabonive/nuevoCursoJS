@@ -57,6 +57,7 @@ let email = 'ariadnabonive@gmail.com';
 let mayorEdad = true;
 let ahorros = 1000;
 let deudas = 500; 
+```
 
 ### 4️⃣ Calcula e imprime las siguientes variables a partir de las variables del ejemplo anterior:
 
@@ -64,11 +65,9 @@ let deudas = 500;
 let nombreCompleto = nombre + ' ' + apellido;
 console.log(nombreCompleto);
 
-
-```js
 let dineroReal = ahorros - deudas;
 console.log(dineroReal);
-
+```
 
 
 ## Funciones
@@ -91,13 +90,18 @@ const lastname = "Castro Gallego";
 const completeName = name + lastname;
 const nickname = "juandc";
 console.log("Mi nombre es " + completeName + ", pero prefiero que me digas " + nickname + ".");
+
 function nombreCompleto(name,lastname) {
-return name + ' ' + lastname;
+    return name + ' ' + lastname;
 }
 
-function saludo (name, nickname) {
-return 'Hola, mi nombre es ' + name + 'pero me puedes decir ' + nickname;
+function saludo (name, lastname, nickname ) {
+    const completeName = nombreCompleto(name, lastname);
+
+    return 'Hola, mi nombre es ' + completeName + 'pero me puedes decir ' + nickname;
 }
+
+console.log(saludo('juan', 'manuel', 'juanma'));
 ```
 
 ## Condicionales
@@ -116,7 +120,8 @@ Sí, las funciones pueden encapsular cualquier bloque de código incluidas condi
 
 ### 2️⃣ Replica el comportamiento del siguiente código que usa la sentencia switch utilizando if, else y else if:
 
-```
+```js
+//switch
 const tipoDeSuscripcion = "Basic";
 
 switch (tipoDeSuscripcion) {
@@ -133,37 +138,107 @@ switch (tipoDeSuscripcion) {
        console.log("Tú y alguien más pueden tomar TODOS los cursos de Platzi durante un año");
        break;
 }
+
+//if, else, if else
+function conseguirSuscripcion(suscripcion){
+    if (suscripcion == "Free") {
+        console.log("Solo puedes tomar los cursos gratis");
+        return;
+    } else if (suscripcion == "Basic") {
+        console.log("Puedes tomar casi todos los cursos de Platzi durante un mes");
+        return;
+    } else if(suscripcion == "Expert") {
+        console.log("Puedes tomar casi todos los cursos de Platzi durante un año");
+        return;
+    } else if(suscripcion == "ExpertPlus") {
+        console.log("Tú y alguien más pueden tomar TODOS los cursos de Platzi durante un año");
+        return;
+    } 
+    console.warn("Ese tipo de suscripción no existe");
+}
+conseguirSuscripcion('kkkk');
+
 ```
 
 ### 3️⃣ Replica el comportamiento de tu condicional anterior con if, else y else if, pero ahora solo con if (sin else ni else if).
-
 > 💡 Bonus: si ya eres una experta o experto en el lenguaje, te desafío a comentar cómo replicar este comportamiento con arrays y un solo condicional. 😏
 
+```js
+//if 
+const tiposDeSuscripciones = {
+    Free: 'Solo puedes tomar los cursos gratis.', 
+    Basic:'Puedes tomar casi todos los cursos de Platzi durante un mes.', 
+    Expert:'Puedes tomar casi todos los cursos de Platzi durante un año.',
+    ExpertPlus:'Tú y alguien más pueden tomar TODOS los cursos de Platzi durante un año.'
+}
+    
+function conseguirTipoSuscripcion(suscripcion) {
+    if(tiposDeSuscripciones[suscripcion]){
+        console.log(tiposDeSuscripciones[suscripcion]);
+        return;
+    }
+    console.warn("Ese tipo de suscripción no existe");
+}
 
+conseguirTipoSuscripcion('Free');
+```
 ## Ciclos
 
 ### 1️⃣ Responde las siguientes preguntas en la sección de comentarios:
 
 - ¿Qué es un ciclo?
+Un ciclo es un bucle que se repite hasta que se cumpla una condición.
+
 - ¿Qué tipos de ciclos existen en JavaScript?
+Existen varios tipos de ciclos, ente los cuales los más utilizados son el for y el while
+
 - ¿Qué es un ciclo infinito y por qué es un problema?
+Es un ciclo que no termina nunca su ejecución, es un problema ya que su condición y su lógica nunca se cumplen. 
+
 - ¿Puedo mezclar ciclos y condicionales?
+Sí, podemos condicionar un ciclo para que se repita todas las veces hasta que se cumplan una condición que internamente puede tener otra condición para su evaluación.
+
 
 ### 2️⃣ Replica el comportamiento de los siguientes ciclos for utilizando ciclos while:
 
-```
+```js
+//for
 for (let i = 0; i < 5; i++) {
     console.log("El valor de i es: " + i);
 }
 
+
 for (let i = 10; i >= 2; i--) {
     console.log("El valor de i es: " + i);
+}
+
+//while
+
+let i = 0;
+while (i<5) {
+    console.log(`El valor de i es: ${i}`)
+    i++;
+}
+
+let i = 10;
+while( i>= 2) {
+    console.log(`El valor de i es: ${i}`)
+    i--;
 }
 ```
 
 ### 3️⃣ Escribe un código en JavaScript que le pregunte a los usuarios cuánto es `2 + 2`. Si responden bien, mostramos un mensaje de felicitaciones, pero si responden mal, volvemos a empezar.
-
 > 💡 Pista: puedes usar la función prompt de JavaScript.
+
+```js
+let response = prompt('¿Cuánto es 2 + 2?');
+
+if(response == 4) {
+alert('Felicidades, sabes sumar.');
+} else {
+alert('Lo siento,no es la respuesta correcta.')
+}
+```
 
 
 ## Listas
@@ -171,16 +246,77 @@ for (let i = 10; i >= 2; i--) {
 ### 1️⃣ Responde las siguientes preguntas en la sección de comentarios:
 
 - ¿Qué es un array?
+Es una colección ordenada de datos.
+
 - ¿Qué es un objeto?
+Es una colección de elementos, donde cada elemento tiene una clave y un valor. 
+
 - ¿Cuándo es mejor usar objetos o arrays?
+Es recomendable usar objetos cuando el conjunto de elementos es muy grande o se relaciona con distintas variables. 
+
 - ¿Puedo mezclar arrays con objetos o incluso objetos con arrays?
+Si.
 
 ### 2️⃣ Crea una función que pueda recibir cualquier array como parámetro e imprima su primer elemento.
+```js
+let numeros=["uno", "dos", "tres"];
+
+ function firstElementArray(array){
+     return console.log(array[0]);
+   }
+
+   firstElementArray(numeros);
+```
+
 
 ### 3️⃣ Crea una función que pueda recibir cualquier array como parámetro e imprima todos sus elementos uno por uno (no se vale imprimir el array completo).
+```js
+let frutas =["manzana", "pera", "mango"];
+let colores=[ "amarillo", "azul", "rojo"];
+
+function recorrerArray(array) {
+  for(let elemento of array){
+    console.log(`${elemento}`);
+  }
+}
+recorrerArray(colores);
+```
+
 
 ### 4️⃣ Crea una función que pueda recibir cualquier objeto como parámetro e imprima todos sus elementos uno por uno (no se vale imprimir el objeto completo).
+```js
+/forma 1
+let persona = {
+    nombre:'Ariadna',
+    edad:29,
+    hijos: false
+}
 
+function elementoPorElemento(objeto){
+    const array = Object.values(objeto);
+    for (let i = 0; i < array.length; i++) {
+        console.log(array[i])
+    }
+}
+
+elementoPorElemento(persona)
+
+
+// forma2
+let mascota = {
+    nombre:'Baco',
+    edad:4,
+    sexo: 'Macho'
+}
+
+function mostrarObjeto(objeto){
+    for(const key in objeto){
+        console.log(`${objeto[key]}`);
+    }
+}
+
+mostrarObjeto(mascota)
+```
 
 ## ¿Cómo te fue? 🏆
 
